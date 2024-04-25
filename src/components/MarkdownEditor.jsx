@@ -1,29 +1,28 @@
-import React from "react";
+import {useEffect, useRef} from "react";
 import Editor from "@toast-ui/editor";
 
 
-class MarkdownEditor extends React.Component {
-    refEditor = React.createRef()
+function MarkdownEditor ({ onContentChange }) {
+    const refEditor = useRef()
 
-    componentDidMount() {
+    useEffect(() => {
         const editor = new Editor({
-            el: this.refEditor.current,
+            el: refEditor.current,
             previewStyle: 'tab',
             height: '500px',
             events: {
                 change: () => {
                     const content = editor.getMarkdown()
-                    this.props.onContentChange(content)
+                    onContentChange(content)
                 }
             }
         })
-    }
+    })
 
-    render() {
-        return (
-            <div ref={this.refEditor}></div>
-        )
-    }
+
+    return (
+        <div ref={refEditor}></div>
+    )
 }
 
 export default MarkdownEditor;
