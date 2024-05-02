@@ -1,6 +1,6 @@
 import BaseTemplate from "../../templates/BaseTemplate/BaseTemplate";
 
-const TodoPages = () => {
+const AllTodoPage = () => {
 
     return (
         <BaseTemplate title='Todos Page'>
@@ -9,4 +9,4 @@ const TodoPages = () => {
     )
 }
 
-export default TodoPages;
+export default AllTodoPage;
