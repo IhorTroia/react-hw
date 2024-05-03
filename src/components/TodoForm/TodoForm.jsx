@@ -1,14 +1,19 @@
-import {Button, Form} from "react-bootstrap";
-import {useFormik} from "formik";
+import {Form, Button} from "react-bootstrap";
+import { useFormik } from 'formik';
 import validationSchema from "./validationSchema";
 import PropTypes from "prop-types";
+import {useNavigate} from "react-router-dom";
 
 const defaultFormState = {
     title: '',
     body: '',
 }
+const TodoForm = ({saveDataHandler, clearDataHandler}) => {
+    const navigation = useNavigate();
 
-const TodoForm = ({saveDataHandler}) => {
+    const clickHandler = () => {
+        navigation('todos');
+    }
 
     const formik = useFormik({
         validationSchema,
@@ -26,7 +31,7 @@ const TodoForm = ({saveDataHandler}) => {
                 <Form.Control
                     name='title'
                     type="text"
-                    placeholder="Create Title"
+                    placeholder="Todo title"
                     onChange={formik.handleChange}
                     value={formik.values.title}
                 />
@@ -34,13 +39,13 @@ const TodoForm = ({saveDataHandler}) => {
                     <div className='mt-2 text-danger font-monospace'>{formik.errors.title}</div>
                 }
             </Form.Group>
-            <Form.Group className="mb-3" controlId="TodosForm.body">
-                <Form.Label>Body</Form.Label>
+            <Form.Group className="mb-3" controlId="TodosForm.description">
+                <Form.Label>Task body</Form.Label>
                 <Form.Control
                     name='body'
                     as="textarea"
                     rows={6}
-                    placeholder={'Create Body'}
+                    placeholder='Task body'
                     onChange={formik.handleChange}
                     value={formik.values.body}
                 />
@@ -48,13 +53,18 @@ const TodoForm = ({saveDataHandler}) => {
                     <div className='mt-2 text-danger font-monospace'>{formik.errors.body}</div>
                 }
             </Form.Group>
-            <Button type="submit" variant="outline-primary">Create Task</Button>
+            <div className='mb-3'>
+                <Button className='mx-3' type='submit' variant="outline-primary">Save Todo</Button>
+                <Button onClick={() => {formik.resetForm()}} type='button' variant="outline-warning">Reset Form</Button>
+                <Button onClick={clearDataHandler} className='mx-3' type='button' variant="outline-danger">Delete All Items</Button>
+            </div>
+            <Button onClick={clickHandler} variant='outline-dark'>Check All Todos</Button>
         </Form>
     );
 };
 
 TodoForm.propTypes = {
-    saveDataHandler: PropTypes.func.isRequired,
+    saveDataHandler: PropTypes.func.isRequired
 }
 
 export default TodoForm;

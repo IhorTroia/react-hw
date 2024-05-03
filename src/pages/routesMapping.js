@@ -1,23 +1,22 @@
 import HomePage from './HomePage';
 import PageNotFound from './PageNotFound';
-import SingleTodoPage from './SingleTodoPage';
-import AllTodoPage from "./AllTodosPage";
-
+import AllTodos from "./AllTodos";
+import SingleTodoItemPage from "./SingleTodoItemPage";
 export default [
     {
         path: '/',
-        component: HomePage,
+        component: HomePage
     },
     {
         path: 'todos',
-        component: AllTodoPage,
+        component: AllTodos
     },
     {
         path: 'todos/:id',
-        component: SingleTodoPage,
+        component: SingleTodoItemPage
     },
     {
         path: '*',
-        component: PageNotFound,
+        component: PageNotFound
     },
 ]

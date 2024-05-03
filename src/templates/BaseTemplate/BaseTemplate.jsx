@@ -1,12 +1,11 @@
 import React from 'react';
-import {Container} from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const BaseTemplate = ({ title,children }) => {
+const BaseTemplate = ({title, children, id}) => {
     return (
-        <main>
-            {title && <h1 className='mt-lg-5 text-center'>{title}</h1>}
-            {children}
+        <main id={id}>
+           {title && <h1 className="mt-lg-5 text-center">{title}</h1>}
+           {children}
         </main>
     );
 };
@@ -14,6 +13,6 @@ const BaseTemplate = ({ title,children }) => {
 BaseTemplate.propTypes = {
     title: PropTypes.string,
     children: PropTypes.element,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 }
-
 export default BaseTemplate;
