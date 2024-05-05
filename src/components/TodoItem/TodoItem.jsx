@@ -1,10 +1,17 @@
-import {Button, Card} from "react-bootstrap";
+import {Button, Card, Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
-import styles from './style.module.scss'
-import {deleteItem} from "../../util/deleteItem";
+import styles from './style.module.scss';
 
-const TodoItem = ({id, title, body }) => {
+const TodoItem = ({
+                    id,
+                    index,
+                    title,
+                    body,
+                    deleteSingleTodoHandler,
+                    isCompleted,
+                    updateIsCompleted
+      }) => {
 
   const navigation = useNavigate();
   const clickHandler = () => {
@@ -19,12 +26,22 @@ const TodoItem = ({id, title, body }) => {
         <Card.Title onClick={clickHandler}>#{id} - {title}</Card.Title>
         <Card.Text>{body}</Card.Text>
         <hr/>
-        <form>
-          <input className='mx-2' name='checkbox' type="checkbox"/>
-          <label htmlFor="checkbox">Completed ?</label>
-        </form>
+        <Form.Check
+            inline
+            label="Completed"
+            name="group1"
+            type={"checkbox"}
+            id={`inline-${"checkbox"}-1`}
+            checked={isCompleted}
+            onChange={() => updateIsCompleted(index)}
+        />
         <hr/>
-        <Button onClick={() => deleteItem(id)} variant='danger'>Delete Item</Button>
+        <Button
+            onClick={() => deleteSingleTodoHandler(id)}
+            variant='danger'
+        >
+          Delete Item
+        </Button>
       </Card.Body>
     </Card>
   );

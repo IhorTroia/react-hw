@@ -2,6 +2,7 @@ import BaseTemplate from "../../templates/BaseTemplate";
 import {Container, Row} from "react-bootstrap";
 import {getData} from "../../util/saveTodos";
 import TodoItem from "../../components/TodoItem";
+import React from "react";
 
 
 const AllTodos = () => {
@@ -13,8 +14,12 @@ const AllTodos = () => {
                 {todos.length ?
                     todos.map((todo) => {
                         return (
-                            <Row key={todo.id}>
-                                <TodoItem id={todo.id} title={todo.title} body={todo.body}/>
+                            <Row className='my-5 text-center' style={{border: '2px solid black'}}  key={todo.id}>
+                                <h4>{'#' + todo.id} - {todo.title}</h4>
+                                <hr/>
+                                <p>{todo.body}</p>
+                                <hr/>
+                                <p>{todo.isCompleted ? "Task is Completed" : "Task not Completed"}</p>
                             </Row>
                         );
                     })
