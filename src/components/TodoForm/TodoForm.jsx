@@ -21,6 +21,7 @@ const TodoForm = ({saveDataHandler, clearDataHandler}) => {
         onSubmit: values => {
             saveDataHandler(values);
             formik.resetForm();
+
         },
     });
 

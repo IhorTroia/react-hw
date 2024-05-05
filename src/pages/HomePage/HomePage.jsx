@@ -35,9 +35,38 @@ const HomePage = () => {
         setTodoItems(todos);
     };
 
+
+
     useEffect(() => {
         setTodoItems(getData());
     }, [])
+
+    useEffect(() => {
+        const sendTodoItemsToServer = async () => {
+            if (!todoItems.length) return;
+            const url = 'https://663336a5f7d50bbd9b488d51.mockapi.io/api/todo/todo-items';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(todoItems.at(-1))
+                });
+
+                if (!response.ok) {
+                    throw new Error('Произошла ошибка при отправке данных.');
+                }
+
+                const data = await response.json();
+                console.log('Данные успешно отправлены на сервер:', data);
+            } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        };
+        sendTodoItemsToServer();
+    }, [todoItems]);
 
     return (
         <BaseTemplate title='Home Page' id='home-page'>
