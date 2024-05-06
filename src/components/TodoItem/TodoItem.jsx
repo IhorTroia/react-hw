@@ -1,22 +1,26 @@
 import {Button, Card, Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { deleteTodo } from "../../store/slices/todo";
 import styles from './style.module.scss';
 
 const TodoItem = ({
                     id,
-                    index,
                     title,
                     body,
-                    deleteSingleTodoHandler,
-                    isCompleted,
-                    updateIsCompleted
       }) => {
 
   const navigation = useNavigate();
+  const dispatch = useDispatch();
+
   const clickHandler = () => {
     navigation('todos/' + id)
   }
+
+    const deleteTodoItem = () => {
+        dispatch(deleteTodo(id));
+    };
 
   return (
     <Card
@@ -26,18 +30,8 @@ const TodoItem = ({
         <Card.Title onClick={clickHandler}>#{id} - {title}</Card.Title>
         <Card.Text>{body}</Card.Text>
         <hr/>
-        <Form.Check
-            inline
-            label="Completed"
-            name="group1"
-            type={"checkbox"}
-            id={`inline-${"checkbox"}-1`}
-            checked={isCompleted}
-            onChange={() => updateIsCompleted(index)}
-        />
-        <hr/>
         <Button
-            onClick={() => deleteSingleTodoHandler(id)}
+            onClick={deleteTodoItem}
             variant='danger'
         >
           Delete Item

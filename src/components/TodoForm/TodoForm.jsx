@@ -3,16 +3,23 @@ import { useFormik } from 'formik';
 import validationSchema from "./validationSchema";
 import PropTypes from "prop-types";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {deleteAllTodo} from "../../store/slices/todo";
 
 const defaultFormState = {
     title: '',
     body: '',
 }
-const TodoForm = ({saveDataHandler, clearDataHandler}) => {
+const TodoForm = ({saveDataHandler}) => {
     const navigation = useNavigate();
+    const dispatch = useDispatch();
 
     const clickHandler = () => {
         navigation('todos');
+    }
+
+    const deleteAllTodoItems = () => {
+        dispatch(deleteAllTodo());
     }
 
     const formik = useFormik({
@@ -21,7 +28,6 @@ const TodoForm = ({saveDataHandler, clearDataHandler}) => {
         onSubmit: values => {
             saveDataHandler(values);
             formik.resetForm();
-
         },
     });
 
@@ -57,7 +63,7 @@ const TodoForm = ({saveDataHandler, clearDataHandler}) => {
             <div className='mb-3'>
                 <Button className='mx-3' type='submit' variant="outline-primary">Save Todo</Button>
                 <Button onClick={() => {formik.resetForm()}} type='button' variant="outline-warning">Reset Form</Button>
-                <Button onClick={clearDataHandler} className='mx-3' type='button' variant="outline-danger">Delete All Items</Button>
+                <Button onClick={deleteAllTodoItems} className='mx-3' type='button' variant="outline-danger">Delete All Items</Button>
             </div>
             <Button onClick={clickHandler} variant='outline-dark'>Check All Todos</Button>
         </Form>

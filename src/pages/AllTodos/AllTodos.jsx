@@ -1,12 +1,10 @@
 import BaseTemplate from "../../templates/BaseTemplate";
 import {Container, Row} from "react-bootstrap";
-import {getData} from "../../util/saveTodos";
-import TodoItem from "../../components/TodoItem";
-import React from "react";
+import {useSelector} from "react-redux";
 
 
 const AllTodos = () => {
-    const todos = getData();
+    const todos = useSelector((state) => state.todos.value);
 
     return (
         <BaseTemplate id='todos-page' title='All Todos'>
@@ -18,8 +16,6 @@ const AllTodos = () => {
                                 <h4>{'#' + todo.id} - {todo.title}</h4>
                                 <hr/>
                                 <p>{todo.body}</p>
-                                <hr/>
-                                <p>{todo.isCompleted ? "Task is Completed" : "Task not Completed"}</p>
                             </Row>
                         );
                     })

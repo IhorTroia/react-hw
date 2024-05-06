@@ -2,19 +2,16 @@ import TodoItem from "../TodoItem";
 import {Col, Row} from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const TodoList = ({todos, deleteSingleTodoHandler, updateIsCompleted}) => {
+const TodoList = ({todos}) => {
   return (
           <Row>
               {
-                  todos.reduceRight((acc, item, index) => (
+                  todos.reduceRight((acc, item) => (
                       <>
                           {acc}
                           <Col key={Math.random()} md={4}>
                               <TodoItem
                                   {...item}
-                                  index={index}
-                                  deleteSingleTodoHandler={deleteSingleTodoHandler}
-                                  updateIsCompleted={updateIsCompleted}
                               />
                           </Col>
                       </>
