@@ -1,6 +1,7 @@
 import HomePage from './HomePage';
-import PageNotFound from './PageNotFound';
 import SingleTodoPage from './SingleTodoPage';
+import AllTodosPage from "./AllTodosPage";
+import PageNotFound from './PageNotFound';
 
 export default [
     {
@@ -8,11 +9,15 @@ export default [
         component: HomePage,
     },
     {
-        path: '*',
-        component: PageNotFound,
+        path: 'todos',
+        component: AllTodosPage,
     },
     {
         path: 'todo',
         component: SingleTodoPage,
+    },
+    {
+        path: '*',
+        component: PageNotFound,
     },
 ]

@@ -7,7 +7,7 @@ const RoutesMapping = () => {
 
     useEffect(() => {
         setRoutes(routesArray.map( ({path, component: Component}) => {
-            return <Route path={path} element={<Component />} />
+            return <Route key={path} path={path} element={<Component />} />
         }))
     }, []);
 
