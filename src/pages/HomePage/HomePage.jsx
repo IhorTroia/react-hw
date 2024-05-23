@@ -3,15 +3,21 @@ import {Col, Container, Row} from "react-bootstrap";
 import TodoForm from "../../components/TodoForm";
 import TodoList from "../../components/TodoList";
 import {useEffect, useState} from "react";
+import {getData, saveTodoItem} from '../../utils/saveTodos'
 
 const HomePage = () => {
     const [todoItems, setTodoItems] = useState([]);
 
     const addTodoItem = (todoItem) => {
         const newState = structuredClone(todoItems);
-        newState.push(todoItem);
+        const savedData = saveTodoItem(todoItem);
+        newState.push(savedData);
         setTodoItems(newState);
     }
+
+    useEffect(() => {
+        setTodoItems(getData());
+    }, []);
 
     return (
         <BaseTemplate title='Home Page'>

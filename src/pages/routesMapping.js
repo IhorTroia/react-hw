@@ -13,7 +13,7 @@ export default [
         component: AllTodosPage,
     },
     {
-        path: 'todo',
+        path: 'todos/:id',
         component: SingleTodoPage,
     },
     {

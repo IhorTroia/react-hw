@@ -1,4 +1,4 @@
-import {Container} from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const BaseTemplate = ({title, children}) => {
     return (
@@ -8,5 +8,10 @@ const BaseTemplate = ({title, children}) => {
         </main>
     );
 };
+
+BaseTemplate.propTypes = {
+    title: PropTypes.string,
+    children: PropTypes.element,
+}
 
 export default BaseTemplate;
