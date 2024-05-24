@@ -8,7 +8,7 @@ const defaultFormState = {
     body: '',
 };
 
-const TodoForm = ({saveDataHandler}) => {
+const TodoForm = ({saveDataHandler, deleteAllTodos}) => {
 
 
     const formik = useFormik({
@@ -50,6 +50,19 @@ const TodoForm = ({saveDataHandler}) => {
                 }
             </Form.Group>
             <Button type='submit' variant="info">Save Item</Button>
+            <Button
+                onClick={() => {formik.resetForm()}}
+                className='mx-2'
+                type='button'
+                variant='dark'
+            >Reset Form
+            </Button>
+            <Button
+                onClick={deleteAllTodos}
+                type='button'
+                variant='danger'
+            >Remove All Items
+            </Button>
         </Form>
     );
 };

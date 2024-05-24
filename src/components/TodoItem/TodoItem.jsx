@@ -1,9 +1,9 @@
-import {Card} from "react-bootstrap";
+import {Button, Card} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from './style.module.scss'
 
-const TodoItem = ({id, title, body}) => {
+const TodoItem = ({id, title, body, removeSingleItem}) => {
     const navigation = useNavigate();
 
     const clickHandler = () => {
@@ -15,6 +15,8 @@ const TodoItem = ({id, title, body}) => {
             <Card.Body>
                 <Card.Title onClick={clickHandler}>#{id} - {title}</Card.Title>
                 <Card.Text>{body}</Card.Text>
+                <hr/>
+                <Button onClick={() => {removeSingleItem(id)}} type='button' variant='light'>Remove Item</Button>
             </Card.Body>
         </Card>
     );
