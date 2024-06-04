@@ -1,29 +1,23 @@
 import BaseTemplate from "../../templates/BaseTemplate";
 import {useParams} from "react-router-dom";
 import TodoItem from "../../components/TodoItem";
-import {getItemById} from "../../utils/saveTodos";
-import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {Container} from "react-bootstrap";
 
-const defaultState = {
-    id: '',
-    title: '',
-    body: '',
-}
 
 const SingleTodoPage = () => {
-    const [todoItemData, setTodoItemData] = useState({...defaultState});
+    const todoItems = useSelector(state => state.todoItems.data);
 
     const {id: todoItemId} = useParams();
 
-    useEffect(() => {
-        const data = getItemById(todoItemId);
-        setTodoItemData(data);
-    }, []);
+    const todoItemData = todoItems.find((item) => item.id === +todoItemId);
 
 
     return (
         <BaseTemplate title={todoItemId + ' Todo Item'}>
-            <TodoItem {...todoItemData}/>
+            <Container>
+                <TodoItem {...todoItemData}/>
+            </Container>
         </BaseTemplate>
     )
 }

@@ -2,8 +2,12 @@ import {Button, Card} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from './style.module.scss'
+import {useDispatch} from "react-redux";
+import {deleteTodoItem} from "../../store/slices/todoItems";
 
-const TodoItem = ({id, title, body, removeSingleItem}) => {
+const TodoItem = ({id, title, body}) => {
+    const dispatch = useDispatch();
+
     const navigation = useNavigate();
 
     const clickHandler = () => {
@@ -16,7 +20,13 @@ const TodoItem = ({id, title, body, removeSingleItem}) => {
                 <Card.Title onClick={clickHandler}>#{id} - {title}</Card.Title>
                 <Card.Text>{body}</Card.Text>
                 <hr/>
-                <Button onClick={() => {removeSingleItem(id)}} type='button' variant='light'>Remove Item</Button>
+                <Button
+                    onClick={() => {dispatch(deleteTodoItem(id))}}
+                    type='button'
+                    variant='light'
+                >
+                    Remove Item
+                </Button>
             </Card.Body>
         </Card>
     );

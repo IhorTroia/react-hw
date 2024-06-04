@@ -1,17 +1,17 @@
 import BaseTemplate from "../../templates/BaseTemplate";
-import {getData} from "../../utils/saveTodos";
 import {Col, Container, Row} from "react-bootstrap";
 import TodoItem from "../../components/TodoItem";
+import {useSelector} from "react-redux";
 
 const AllTodosPage = () => {
-    const data = getData();
+    const todoItems = useSelector(state => state.todoItems.data);
 
     return (
         <BaseTemplate title='All Todos'>
             <Container>
                 <Row>
                     {
-                        data
+                        todoItems
                             .map((item) => <Col key={Math.random()} md={4}>
                                 <TodoItem {...item}/>
                             </Col>)

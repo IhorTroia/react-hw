@@ -1,6 +1,8 @@
 import {Button, Form} from "react-bootstrap";
 import {useFormik} from "formik";
 import validationSchema from './validationSchema';
+import {useDispatch} from "react-redux";
+import {addTodoItem, deleteAllTodoItems} from "../../store/slices/todoItems";
 import PropTypes from "prop-types";
 
 const defaultFormState = {
@@ -8,14 +10,16 @@ const defaultFormState = {
     body: '',
 };
 
-const TodoForm = ({saveDataHandler, deleteAllTodos}) => {
+const TodoForm = () => {
+
+    const dispatch = useDispatch();
 
 
     const formik = useFormik({
         initialValues: {...defaultFormState},
         validationSchema,
         onSubmit: values => {
-            saveDataHandler(values);
+            dispatch(addTodoItem(values));
             formik.resetForm();
         },
     });
@@ -58,7 +62,7 @@ const TodoForm = ({saveDataHandler, deleteAllTodos}) => {
             >Reset Form
             </Button>
             <Button
-                onClick={deleteAllTodos}
+                onClick={() => dispatch(deleteAllTodoItems())}
                 type='button'
                 variant='danger'
             >Remove All Items
@@ -66,9 +70,5 @@ const TodoForm = ({saveDataHandler, deleteAllTodos}) => {
         </Form>
     );
 };
-
-TodoForm.propTypes = {
-    saveDataHandler: PropTypes.func.isRequired,
-}
 
 export default TodoForm;
